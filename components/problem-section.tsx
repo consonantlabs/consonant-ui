@@ -4,13 +4,13 @@ export function ProblemSection() {
   const problems = [
     {
       icon: AlertTriangle,
-      title: "Fragmented tools & agents",
-      description: "Teams build/buy many tools with different APIs and schemas. No standardized contract exists.",
+      title: "Fragmented agents systems",
+      description: "Teams build/buy many agents with different frameworks. Each operates independently. No unified orchestration for multi-step workflows. No standardized contract exists.",
     },
     {
       icon: Code2,
-      title: "Hard-coded orchestration",
-      description: "Workflows are stitched using brittle scripts. Any change requires code edits and redeploys.",
+      title: "Hard-coded Workflow Logic",
+      description: "Routing between agents requires code changes. Every business rule modification means redeployment. Brittle, expensive to maintain, impossible to adapt at runtime.",
     },
     {
       icon: Database,
@@ -38,9 +38,9 @@ export function ProblemSection() {
     <section className="py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">What's Broken Today</h2>
+          <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-4">Production Agent Systems Need Coordination Infrastructure</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Current tooling leaves teams with fragmented systems and no unified control.
+            Current tooling leaves teams with fragmented systems, no unified control and breaks at scale.
           </p>
         </div>
 

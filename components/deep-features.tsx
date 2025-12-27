@@ -6,7 +6,7 @@ export function DeepFeatures() {
       icon: Brain,
       title: "Decoupled Decision Engine",
       description:
-        "Evaluates state, manifests, and policies to choose the next action. No hardcoded flows — pure adaptive orchestration.",
+        "Evaluates state, manifests, historical behavior and policies to choose the next action. No hardcoded flows — pure adaptive orchestration.",
       details: ["State-aware action selection", "Policy-driven boundaries", "Runtime capability discovery"],
     },
     {
@@ -16,6 +16,13 @@ export function DeepFeatures() {
         "Retries, backoff, fallback, streaming — orchestrated, not manual. Every failure mode handled systematically.",
       details: ["Automatic retry with exponential backoff", "Fallback tool chains", "Streaming support built-in"],
     },
+  //  {
+  //   title: "Declarative Policy Enforcement",
+  //   icon: RotateCcw,
+  //   description:
+  //     "Define rules in YAML using OPA (Open Policy Agent). Evaluated before every agent invocation. Approval thresholds, RBAC, rate limits, compliance constraints—enforced automatically.",
+  //   details: ["Rate limiting & quotas", "Compliance enforcement", "Access controls & approvals"],
+  //  },
     {
       icon: LayoutDashboard,
       title: "Unified Dashboard",
@@ -48,8 +55,8 @@ export function DeepFeatures() {
                   <feature.icon className="w-7 h-7 text-primary" />
                 </div>
 
-                <h3 className="text-xl font-semibold text-foreground mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">{feature.description}</p>
+                <h3 className="text-lg font-semibold text-foreground mb-3">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm mb-6 leading-relaxed">{feature.description}</p>
 
                 <ul className="space-y-2">
                   {feature.details.map((detail, i) => (

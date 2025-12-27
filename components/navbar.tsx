@@ -26,7 +26,7 @@ export function Navbar() {
             </NavLink>
             <NavLink href="#">Platform</NavLink>
             <NavLink href="#">Docs</NavLink>
-            <NavLink href="#">Pricing</NavLink>
+           
             <NavLink href="#" hasDropdown>
               Company
             </NavLink>
@@ -34,11 +34,9 @@ export function Navbar() {
         </div>
 
         <div className="hidden lg:flex items-center gap-4">
-          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-            Log In
-          </Button>
+          
           <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-            Start Free
+            Join Waitlist
           </Button>
         </div>
 

@@ -30,7 +30,7 @@ export function Footer() {
               <span className="text-lg font-semibold text-foreground">TERRA</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              The control plane for tool and agent orchestration.
+              Control plane for multi-agent systems.
             </p>
           </div>
 
@@ -51,7 +51,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">© 2025 Terra. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground">© 2025 Terra. Built on Kagent (CNCF Sandbox Project). All rights reserved.</p>
           <div className="flex items-center gap-6">
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Twitter

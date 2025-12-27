@@ -20,7 +20,6 @@ export default function Home() {
       <GridBackground />
       <Navbar />
       <HeroSection />
-      <MetricsStrip />
       <ProblemSection />
       <SolutionSection />
       <DeepFeatures />
@@ -29,8 +28,8 @@ export default function Home() {
       <RunLifecycle />
       <DashboardPreviews />
       <PersonasSection />
-      <InstallSection />
-      <PricingSection />
+      {/* <InstallSection />
+      <PricingSection /> */}
       <FinalCTA />
       <Footer />
     </main>

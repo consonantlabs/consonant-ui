@@ -11,29 +11,27 @@ export function HeroSection() {
         </div>
 
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-6 text-balance">
-          The Control Plane for Every <span className="text-primary">Tool, Agent,</span> and{" "}
-          <span className="text-primary">Workflow</span>
+          Adaptive Control Plane for <span className="text-primary">Multi-Agent Systems.</span> 
         </h1>
 
         <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed text-pretty">
-          Terra orchestrates, composes, and operates arbitrarily many tools and agents through a universal manifest
+          Terra orchestrates, composes agents across frameworks—LangChain, AutoGen, custom tools—with runtime goal-based routing through a universal manifest
           system — delivering adaptive workflows, durable run state, policy enforcement, full observability, and
-          complete operational control.
+          complete operational control. 
         </p>
+
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-8 text-base">
-            Start Free
+            Join Waitlist
             <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="h-12 px-8 text-base border-border hover:bg-secondary bg-transparent"
-          >
-            <Play className="mr-2 w-4 h-4" />
-            View Architecture
-          </Button>
+          
+        </div>
+        <div className="mt-8 relative">
+        <p>
+          <span className="text-lg text-white absolute inset-0">Cloud or Self-hosted</span>
+        </p>
         </div>
 
         <div className="mt-20 relative">
@@ -46,7 +44,7 @@ export function HeroSection() {
               <span className="text-xs text-muted-foreground ml-4 font-mono">terra-dashboard</span>
             </div>
             <div className="p-6 h-80 bg-gradient-to-br from-card to-secondary/20 flex items-center justify-center">
-              <div className="text-muted-foreground/50 text-sm">Dashboard Preview</div>
+              <div className="text-muted-foreground/50 text-sm">Coming Here soon!</div>
             </div>
           </div>
         </div>
