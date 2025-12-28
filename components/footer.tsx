@@ -28,8 +28,9 @@ export function Footer() {
               <span className="text-lg font-semibold text-foreground">Consonant</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
-  Orchestration infrastructure for agent.
+  Orchestration infrastructure for ai agent.
 </p>
+
           </div>
 
           {columns.map((column, index) => (
