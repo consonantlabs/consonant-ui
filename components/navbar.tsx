@@ -14,9 +14,7 @@ export function Navbar() {
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-10">
           <a href="#" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-md bg-primary/20 border border-primary/40 flex items-center justify-center">
-              <span className="text-primary font-bold text-sm">T</span>
-            </div>
+            
             <span className="text-xl font-semibold tracking-tight text-foreground">CONSONANT</span>
           </a>
 
