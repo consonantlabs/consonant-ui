@@ -1,87 +1,142 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X, Github, FileText, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
-      <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-10">
-          <a href="#" className="flex items-center gap-2">
-            
-            <span className="text-xl font-semibold tracking-tight text-foreground">CONSONANT</span>
-          </a>
-
-          <div className="hidden lg:flex items-center gap-8">
-            <NavLink href="#" hasDropdown>
-              Product
-            </NavLink>
-            <NavLink href="#">Platform</NavLink>
-            <NavLink href="#">Docs</NavLink>
-           
-            <NavLink href="#" hasDropdown>
-              Company
-            </NavLink>
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:border-primary/50 transition-colors">
+            <span className="text-primary font-bold text-sm">C</span>
           </div>
+          <span className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+            Consonant
+          </span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-1">
+          <NavLink href="/docs">Documentation</NavLink>
+          <NavLink href="/docs/architecture">Architecture</NavLink>
+          <NavLink href="/docs/quickstart">Quickstart</NavLink>
+          <NavLink href="https://github.com/consonant-ai/consonant" external>
+            <Github className="w-4 h-4" />
+            GitHub
+          </NavLink>
         </div>
 
-        <div className="hidden lg:flex items-center gap-4">
-          
-          <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-             <a href="https://forms.gle/zdJF2e2pDhcN7aLX7" target="_blank" rel="noopener noreferrer">
-    Join Waitlist
-  </a>
+        {/* Desktop CTA */}
+        <div className="hidden md:flex items-center gap-3">
+          <Button variant="ghost" size="sm" asChild className="text-muted-foreground hover:text-primary">
+            <a href="https://forms.gle/zdJF2e2pDhcN7aLX7" target="_blank" rel="noopener noreferrer">
+              Request Demo
+            </a>
+          </Button>
+          <Button size="sm" asChild className="bg-primary text-primary-foreground hover:bg-primary/90 glow-border">
+            <Link href="/docs" className="flex items-center gap-2">
+              Get Started
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </Button>
         </div>
 
-        <button className="lg:hidden text-foreground" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
-      </nav>
+      </div>
 
-      {isOpen && (
-        <div className="lg:hidden border-t border-border/50 bg-background/95 backdrop-blur-xl">
-          <div className="px-6 py-4 space-y-4">
-            <a href="#" className="block text-foreground py-2">
-              Product
-            </a>
-            <a href="#" className="block text-foreground py-2">
-              Platform
-            </a>
-            <a href="#" className="block text-foreground py-2">
-              Docs
-            </a>
-           
-            <a href="#" className="block text-foreground py-2">
-              Company
-            </a>
-            <div className="pt-4 space-y-2">
-              
-              <Button className="w-full bg-primary text-primary-foreground"><a href="https://forms.gle/zdJF2e2pDhcN7aLX7" target="_blank" rel="noopener noreferrer">
-    Join Waitlist
-  </a></Button>
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-xl">
+          <div className="px-6 py-4 space-y-3">
+            <MobileNavLink href="/docs" onClick={() => setMobileMenuOpen(false)}>
+              <FileText className="w-4 h-4" />
+              Documentation
+            </MobileNavLink>
+            <MobileNavLink href="/docs/architecture" onClick={() => setMobileMenuOpen(false)}>
+              Architecture
+            </MobileNavLink>
+            <MobileNavLink href="/docs/quickstart" onClick={() => setMobileMenuOpen(false)}>
+              Quickstart
+            </MobileNavLink>
+            <MobileNavLink href="https://github.com/consonant-ai/consonant" external onClick={() => setMobileMenuOpen(false)}>
+              <Github className="w-4 h-4" />
+              GitHub
+            </MobileNavLink>
+            
+            <div className="pt-3 border-t border-border space-y-2">
+              <Button variant="outline" size="sm" asChild className="w-full justify-center">
+                <a href="https://forms.gle/zdJF2e2pDhcN7aLX7" target="_blank" rel="noopener noreferrer">
+                  Request Demo
+                </a>
+              </Button>
+              <Button size="sm" asChild className="w-full justify-center bg-primary text-primary-foreground">
+                <Link href="/docs">Get Started</Link>
+              </Button>
             </div>
           </div>
         </div>
       )}
-    </header>
+    </nav>
   )
 }
 
-function NavLink({ href, children, hasDropdown }: { href: string; children: React.ReactNode; hasDropdown?: boolean }) {
+function NavLink({ 
+  href, 
+  children, 
+  external 
+}: { 
+  href: string
+  children: React.ReactNode
+  external?: boolean 
+}) {
+  const Component = external ? 'a' : Link
+  const externalProps = external ? { target: "_blank", rel: "noopener noreferrer" } : {}
+  
   return (
-    <a
+    <Component
       href={href}
-      className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+      className="flex items-center gap-1.5 px-3 py-2 text-sm text-muted-foreground hover:text-primary transition-colors rounded-lg hover:bg-primary/5"
+      {...externalProps}
     >
       {children}
-      {hasDropdown && <ChevronDown className="w-3 h-3" />}
-    </a>
+    </Component>
+  )
+}
+
+function MobileNavLink({ 
+  href, 
+  children, 
+  external,
+  onClick 
+}: { 
+  href: string
+  children: React.ReactNode
+  external?: boolean
+  onClick?: () => void 
+}) {
+  const Component = external ? 'a' : Link
+  const externalProps = external ? { target: "_blank", rel: "noopener noreferrer" } : {}
+  
+  return (
+    <Component
+      href={href}
+      className="flex items-center gap-2 px-3 py-2.5 text-foreground hover:text-primary transition-colors rounded-lg hover:bg-primary/5"
+      onClick={onClick}
+      {...externalProps}
+    >
+      {children}
+    </Component>
   )
 }
