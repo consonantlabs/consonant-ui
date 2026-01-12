@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Github, Mail } from "lucide-react"
+import { ArrowRight, Github, Mail, Terminal, Shield, LineChart } from "lucide-react"
 import Link from "next/link"
 
 export function FinalCTA() {
@@ -13,74 +13,103 @@ export function FinalCTA() {
         <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[150px]" />
       </div>
       
-      <div className="max-w-4xl mx-auto relative z-10 text-center">
-        {/* Main Content */}
-        <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-          Ready to orchestrate
-          <br />
-          <span className="text-gradient-primary">your AI agents?</span>
-        </h2>
-        
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-          Deploy in your infrastructure. Keep your data sovereign. 
-          Start with the open source core, upgrade when you need to.
-        </p>
-        
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 h-14 px-8 text-base glow-border group w-full sm:w-auto">
-            <Link href="/docs" className="flex items-center gap-2">
-              View Documentation
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </Button>
-          <Button size="lg" variant="outline" className="h-14 px-8 text-base border-border hover:border-primary/50 w-full sm:w-auto">
-            <a 
-              href="https://github.com/consonant-ai/consonant" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
-            >
-              <Github className="w-4 h-4" />
-              Star on GitHub
-            </a>
-          </Button>
-        </div>
-        
-        {/* Trust Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-primary/60" />
-            <span>Self-hosted</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-primary/60" />
-            <span>Open source core</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-primary/60" />
-            <span>Data sovereignty</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-primary/60" />
-            <span>SOC2 ready</span>
-          </div>
-        </div>
-        
-        {/* Enterprise Contact */}
-        <div className="mt-12 p-6 rounded-xl border border-border bg-card/30 backdrop-blur-sm inline-block">
-          <p className="text-sm text-muted-foreground mb-3">
-            Need enterprise features? Multi-cluster deployment? Dedicated support?
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            Start shipping <span className="text-gradient-primary">production agents</span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Choose your path to production. Open source core, enterprise governance.
           </p>
-          <a 
-            href="https://forms.gle/zdJF2e2pDhcN7aLX7" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-primary hover:underline text-sm font-medium"
-          >
-            <Mail className="w-4 h-4" />
-            Request an enterprise demo
-          </a>
+        </div>
+
+        {/* 3 User Paths */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          
+          {/* Path 1: Developers */}
+          <div className="relative group rounded-xl border border-border bg-card/50 p-6 hover:border-primary/40 transition-colors">
+            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
+            <div className="relative">
+               <div className="flex items-center gap-3 mb-4">
+                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                   <Terminal className="w-5 h-5" />
+                 </div>
+                 <h3 className="font-semibold text-lg">Developers</h3>
+               </div>
+               
+               <div className="bg-secondary/50 rounded-lg p-3 font-mono text-xs text-muted-foreground mb-4 overflow-x-auto border border-border">
+                 <div>helm install consonant</div>
+                 <div className="mt-1">kubectl apply -f agent.yaml</div>
+                 <div className="mt-1 text-primary">consonant run --goal "test"</div>
+               </div>
+               
+               <Button variant="outline" className="w-full justify-between" asChild>
+                 <Link href="/docs/quickstart">
+                   Try Locally
+                   <ArrowRight className="w-4 h-4 ml-2" />
+                 </Link>
+               </Button>
+            </div>
+          </div>
+
+          {/* Path 2: Platform Teams */}
+          <div className="relative group rounded-xl border border-border bg-card/50 p-6 hover:border-primary/40 transition-colors">
+            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
+            <div className="relative">
+               <div className="flex items-center gap-3 mb-4">
+                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                   <Shield className="w-5 h-5" />
+                 </div>
+                 <h3 className="font-semibold text-lg">Platform Teams</h3>
+               </div>
+               
+               <ul className="space-y-2 mb-6 text-sm text-muted-foreground">
+                 <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" />Multi-cluster support</li>
+                 <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" />Policy enforcement (OPA)</li>
+                 <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" />Complete observability</li>
+               </ul>
+               
+               <Button variant="outline" className="w-full justify-between" asChild>
+                 <Link href="/docs/architecture">
+                   View Architecture
+                   <ArrowRight className="w-4 h-4 ml-2" />
+                 </Link>
+               </Button>
+            </div>
+          </div>
+
+          {/* Path 3: Executives */}
+          <div className="relative group rounded-xl border border-border bg-card/50 p-6 hover:border-primary/40 transition-colors">
+            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
+            <div className="relative">
+               <div className="flex items-center gap-3 mb-4">
+                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                   <LineChart className="w-5 h-5" />
+                 </div>
+                 <h3 className="font-semibold text-lg">Executives</h3>
+               </div>
+               
+               <ul className="space-y-2 mb-6 text-sm text-muted-foreground">
+                 <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" />40% infrastructure savings</li>
+                 <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" />SOC2 compliance ready</li>
+                 <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" />Zero vendor lock-in</li>
+               </ul>
+               
+               <Button variant="outline" className="w-full justify-between" asChild>
+                 <a href="https://forms.gle/zdJF2e2pDhcN7aLX7" target="_blank" rel="noopener noreferrer">
+                   Schedule Demo
+                   <ArrowRight className="w-4 h-4 ml-2" />
+                 </a>
+               </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Links */}
+        <div className="flex justify-center gap-8 text-sm text-muted-foreground">
+           <a href="https://github.com/consonant-ai/consonant" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
+           <Link href="/docs" className="hover:text-foreground transition-colors">Documentation</Link>
+           <a href="mailto:team@consonant.ai" className="hover:text-foreground transition-colors">Contact Sales</a>
         </div>
       </div>
     </section>

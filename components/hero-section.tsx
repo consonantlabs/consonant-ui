@@ -14,35 +14,36 @@ export function HeroSection() {
       
       <div className="max-w-6xl mx-auto text-center relative z-10">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm mb-8 animate-fade-in-up">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-destructive/30 bg-destructive/5 text-destructive text-sm mb-8 animate-fade-in-up">
           <Sparkles className="w-4 h-4" />
-          <span>The Missing Infrastructure Layer</span>
+          <span>Production AI Systems Are Breaking</span>
         </div>
         
         {/* Main Headline */}
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground mb-6 animate-fade-in-up delay-100">
-          <span className="block">Orchestrate AI Agents</span>
-          <span className="block text-gradient-primary">with Production-Grade Governance</span>
+          <span className="block">Your AI agents crash together</span>
+          <span className="block text-gradient-primary">because they're stuck in the same container</span>
         </h1>
         
         {/* Subheadline */}
         <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed animate-fade-in-up delay-200">
-          Consonant coordinates multiple AI agents across any framework with built-in policy enforcement, 
-          complete audit trails, and operational controls. Deploy confidently knowing every agent action 
-          is governed, traceable, and reversible.
+          <span className="text-foreground font-medium">Consonant separates them.</span> Each agent runs independently, 
+          scales on its own, and fails without taking down your entire system. Built on Kubernetes, works with any framework, 
+          enforces policies automatically.
         </p>
         
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6 animate-fade-in-up delay-300">
           <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 h-14 px-8 text-base glow-border group">
-            <a href="/docs" className="flex items-center gap-2">
-              View Documentation
+            <a href="https://forms.gle/zdJF2e2pDhcN7aLX7" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              <Play className="w-4 h-4" />
+              Try Demo
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </Button>
           <Button size="lg" variant="outline" className="h-14 px-8 text-base border-border hover:border-primary/50 hover:bg-primary/5">
-            <a href="https://forms.gle/zdJF2e2pDhcN7aLX7" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-              Request Demo
+            <a href="/docs" className="flex items-center gap-2">
+              View Docs
             </a>
           </Button>
         </div>
@@ -59,9 +60,9 @@ export function HeroSection() {
             <span>Star on GitHub</span>
           </a>
           <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
-          <span>Self-hosted</span>
+          <span>Open Source</span>
           <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
-          <span>Built on Kagent</span>
+          <span>Built on KAgent + Kubernetes</span>
         </div>
         
         {/* Hero Diagram */}

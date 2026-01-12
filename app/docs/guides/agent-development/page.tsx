@@ -1,240 +1,114 @@
-import Link from "next/link"
-import { ArrowRight, Code2, Check, AlertTriangle } from "lucide-react"
+import { DocHeader, CodeBlock, Callout, NextStepCard } from "../../doc-components"
 
 export default function AgentDevelopmentPage() {
   return (
     <div>
-      {/* Header */}
-      <div className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-medium mb-4">
-          <Code2 className="w-3.5 h-3.5" />
-          CORE GUIDE
-        </div>
-        <h1 className="text-4xl font-bold text-foreground mb-4">
-          Agent Development
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          Learn how to create agents that work with Consonant. Any agent framework works - 
-          you just need to register capabilities correctly.
-        </p>
-      </div>
+      <DocHeader 
+        title="Agent Development"
+        description="Learn how to build, containerize, and register agents that can be orchestrated by Consonant."
+        label="GUIDE"
+      />
 
-      {/* Key Concept */}
-      <div className="p-6 rounded-xl border border-primary/30 bg-primary/5 mb-10">
-        <h3 className="font-semibold text-foreground mb-2">Key Concept</h3>
-        <p className="text-muted-foreground">
-          Consonant doesn't care <em>how</em> your agent works internally. It only cares about 
-          <strong className="text-foreground"> what capabilities</strong> your agent exposes. 
-          You describe capabilities in a manifest, and Consonant routes work to your agent based on those descriptions.
+      <div className="prose prose-invert max-w-none text-muted-foreground">
+        <p>
+          Consonant is framework-agnostic. Your agents can be Python scripts, Node.js servers, 
+          or compiled Go binaries. The only requirement is that they expose an HTTP endpoint 
+          that accepts JSON input and returns JSON output.
         </p>
-      </div>
 
-      {/* Agent Manifest */}
-      <div className="mb-10">
-        <h2 className="text-2xl font-bold text-foreground mb-4">The Agent Manifest</h2>
-        <p className="text-muted-foreground mb-4">
-          Every agent is defined by a YAML manifest that describes its capabilities, resource requirements, 
-          and configuration.
+        <h2 className="text-foreground text-2xl font-bold mt-12 mb-6">1. The Agent Interface</h2>
+        <p>
+          Every agent must expose a <code>POST /execute</code> endpoint. Consonant sends the task 
+          context and parameters to this endpoint.
         </p>
-        
-        <CodeBlock code={`# agent.yaml
-apiVersion: consonant.dev/v1
+
+        <CodeBlock code={`# Example: Simple Flask Agent
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({"status": "ok"})
+
+@app.route('/execute', methods=['POST'])
+def execute():
+    data = request.json
+    task = data.get('task')
+    
+    # ... Your agent logic here ...
+    result = perform_task(task)
+    
+    return jsonify({
+        "status": "success",
+        "result": result,
+        "metadata": {"cost": 0.002}
+    })`} language="python" />
+
+        <h2 className="text-foreground text-2xl font-bold mt-12 mb-6">2. Defining Capabilities</h2>
+        <p>
+          To make your agent discoverable by the planner, you must define its capabilities 
+          in a Kubernetes manifest.
+        </p>
+
+        <CodeBlock code={`apiVersion: consonant.dev/v1
 kind: Agent
 metadata:
-  name: k8s-diagnostic
-  namespace: production
-  labels:
-    team: platform
-    environment: production
+  name: data-analyzer
 spec:
-  # Container image for the agent
-  image: mycompany/k8s-diagnostic:v2.1
-  
-  # Capabilities - these are what Consonant uses for routing
+  image: my-registry/data-analyzer:v1
+  description: "Analyzes CSV and JSON datasets to extract insights"
   capabilities:
-    - name: diagnose_pod_issues
-      description: >
-        Analyzes Kubernetes pod failures including crash loops, 
-        OOM kills, and network connectivity issues. Returns 
-        structured diagnosis with root cause and recommendations.
+    - name: analyze_csv
+      description: "Analyze a CSV file URL and return statistical summary"
       parameters:
-        - name: namespace
-          type: string
-          required: true
-        - name: pod_name
-          type: string
-          required: false
-          
-    - name: check_cluster_health
-      description: >
-        Performs comprehensive cluster health check including 
-        node status, resource utilization, and pending pods.
-      parameters:
-        - name: include_metrics
-          type: boolean
-          default: true
-  
-  # Resource requirements
+        properties:
+          url:
+            type: string
+            description: "URL to the CSV file"
+    - name: generate_chart
+      description: "Create a visualization from data"
   resources:
-    cpu: "500m"
-    memory: "512Mi"
-    
-  # Scaling configuration
-  scaling:
-    minReplicas: 1
-    maxReplicas: 5
-    targetCPUUtilization: 70`} />
-      </div>
+    cpu: "1"
+    memory: "2Gi"`} language="yaml" />
 
-      {/* Writing Good Capabilities */}
-      <div className="mb-10">
-        <h2 className="text-2xl font-bold text-foreground mb-4">Writing Good Capability Descriptions</h2>
-        <p className="text-muted-foreground mb-4">
-          Capability descriptions are how Consonant's planner understands what your agent can do. 
-          Better descriptions = better routing decisions.
+        <Callout type="info" title="Prompt Engineering Tips">
+          The <code>description</code> fields are critical. The Planner uses these descriptions 
+          to match user goals to your agent. Be descriptive and specific about what the tool does.
+        </Callout>
+
+        <h2 className="text-foreground text-2xl font-bold mt-12 mb-6">3. Handling State</h2>
+        <p>
+          Consonant agents should ideally be <strong>stateless</strong>. Any context needed for the 
+          task is passed in the request. If you need to persist state across invocations, 
+          use an external database or the Consonant State Store API.
         </p>
-        
-        <div className="grid md:grid-cols-2 gap-4 mb-6">
-          <div className="p-4 rounded-lg border border-destructive/30 bg-destructive/5">
-            <h4 className="font-medium text-foreground mb-2 flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-destructive" />
-              Bad Example
-            </h4>
-            <code className="text-sm text-muted-foreground block">
-              "Checks pods"
-            </code>
-            <p className="text-xs text-muted-foreground mt-2">
-              Too vague. What does "check" mean? What kind of pods? What does it return?
-            </p>
-          </div>
-          <div className="p-4 rounded-lg border border-primary/30 bg-primary/5">
-            <h4 className="font-medium text-foreground mb-2 flex items-center gap-2">
-              <Check className="w-4 h-4 text-primary" />
-              Good Example
-            </h4>
-            <code className="text-sm text-muted-foreground block">
-              "Analyzes Kubernetes pod failures including crash loops, OOM kills, and network issues. Returns root cause and recommendations."
-            </code>
-            <p className="text-xs text-muted-foreground mt-2">
-              Specific actions, clear scope, describes output format.
-            </p>
-          </div>
-        </div>
-        
-        <div className="space-y-3">
-          <Tip title="Be specific about what the agent does, not how">
-            Focus on the outcome, not implementation details.
-          </Tip>
-          <Tip title="Include the types of inputs it handles">
-            Mentioning "crash loops, OOM kills" helps routing.
-          </Tip>
-          <Tip title="Describe the output format">
-            "Returns structured diagnosis" tells the planner what to expect.
-          </Tip>
-        </div>
-      </div>
 
-      {/* Agent Interface */}
-      <div className="mb-10">
-        <h2 className="text-2xl font-bold text-foreground mb-4">Agent Interface</h2>
-        <p className="text-muted-foreground mb-4">
-          Your agent must implement a simple gRPC or HTTP interface that Consonant calls:
+        <h2 className="text-foreground text-2xl font-bold mt-12 mb-6">4. Error Handling</h2>
+        <p>
+          If your agent fails, return a non-200 status code or a JSON payload with 
+          <code>status: "error"</code>. Consonant will automatically handle retries based on your 
+          agent's configuration.
         </p>
-        
-        <CodeBlock code={`# Example Python agent using gRPC
-from consonant_sdk import AgentBase, capability
 
-class DiagnosticAgent(AgentBase):
-    
-    @capability("diagnose_pod_issues")
-    async def diagnose_pod(self, namespace: str, pod_name: str = None):
-        """
-        Consonant calls this when routing to diagnose_pod_issues capability.
-        """
-        # Your diagnostic logic here
-        issues = await self.k8s_client.analyze_pods(namespace, pod_name)
-        
-        return {
-            "status": "completed",
-            "diagnosis": issues,
-            "recommendations": self.generate_recommendations(issues)
-        }
-    
-    @capability("check_cluster_health")
-    async def check_health(self, include_metrics: bool = True):
-        health = await self.k8s_client.get_cluster_health()
-        if include_metrics:
-            health["metrics"] = await self.get_prometheus_metrics()
-        return health`} />
+        <CodeBlock code={`// Error Response Example
+{
+  "status": "error",
+  "error": {
+    "code": "RATE_LIMIT_EXCEEDED",
+    "message": "Upstream API rate limit hit",
+    "retryable": true
+  }
+}`} language="json" />
+
       </div>
 
-      {/* Registering */}
-      <div className="mb-10">
-        <h2 className="text-2xl font-bold text-foreground mb-4">Registering Your Agent</h2>
-        <CodeBlock code={`# Apply the agent manifest
-kubectl apply -f agent.yaml
-
-# Verify registration
-consonant agents list
-
-# Output:
-# NAME             NAMESPACE    STATUS    CAPABILITIES
-# k8s-diagnostic   production   Ready     diagnose_pod_issues, check_cluster_health
-
-# Test invocation
-consonant agents invoke k8s-diagnostic \\
-  --capability check_cluster_health \\
-  --params '{"include_metrics": true}'`} />
-      </div>
-
-      {/* Next Steps */}
-      <div className="p-6 rounded-xl border border-border bg-secondary/20">
+      <div className="mt-16 pt-8 border-t border-border">
         <h3 className="font-semibold text-foreground mb-4">Next Steps</h3>
-        <div className="flex flex-wrap gap-3">
-          <Link 
-            href="/docs/guides/orchestration"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
-          >
-            Learn Orchestration
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-          <Link 
-            href="/docs/api/sdk"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-secondary/50 transition-colors"
-          >
-            SDK Reference
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+        <div className="grid sm:grid-cols-2 gap-4">
+           <NextStepCard href="/docs/guides/orchestration" title="Orchestration" description="See how agents are coordinated" />
+           <NextStepCard href="/docs/reference/api" title="API Reference" description="Full KAgent Protocol spec" />
         </div>
-      </div>
-    </div>
-  )
-}
-
-function CodeBlock({ code }: { code: string }) {
-  return (
-    <div className="rounded-xl border border-border bg-secondary/30 overflow-hidden">
-      <div className="flex items-center gap-2 px-4 py-2 border-b border-border">
-        <div className="w-2.5 h-2.5 rounded-full bg-destructive/60" />
-        <div className="w-2.5 h-2.5 rounded-full bg-chart-4/60" />
-        <div className="w-2.5 h-2.5 rounded-full bg-primary/60" />
-      </div>
-      <pre className="p-4 overflow-x-auto">
-        <code className="text-sm font-mono text-foreground/90 leading-relaxed whitespace-pre">
-          {code}
-        </code>
-      </pre>
-    </div>
-  )
-}
-
-function Tip({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="flex items-start gap-3 p-3 rounded-lg border border-border bg-card/30">
-      <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-      <div>
-        <span className="font-medium text-foreground text-sm">{title}</span>
-        <span className="text-muted-foreground text-sm"> — {children}</span>
       </div>
     </div>
   )

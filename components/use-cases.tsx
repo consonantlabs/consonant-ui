@@ -1,7 +1,23 @@
 "use client"
 
 import { useState } from "react"
-import { Building2, Heart, Server, Shield, ChevronRight, Check, ArrowRight } from "lucide-react"
+import { Building2, Heart, Server, Shield, ChevronRight, Check, ArrowRight, Fingerprint, Cpu, TrendingDown, TrendingUp } from "lucide-react"
+
+function MetricCard({ metric, label, desc, trend }: { metric: string, label: string, desc: string, trend: "up" | "down" }) {
+  return (
+    <div className="p-6 rounded-xl border border-border bg-card/30 hover:border-primary/20 transition-all text-center group bg-gradient-to-b from-card/50 to-transparent">
+      <div className="flex items-center justify-center gap-2 mb-2">
+         <span className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">{metric}</span>
+         {trend === "down" ? 
+           <TrendingDown className="w-5 h-5 text-primary" /> : 
+           <TrendingUp className="w-5 h-5 text-primary" />
+         }
+      </div>
+      <div className="font-semibold text-foreground mb-1">{label}</div>
+      <div className="text-xs text-muted-foreground">{desc}</div>
+    </div>
+  )
+}
 
 export function UseCasesSection() {
   const [activeCase, setActiveCase] = useState(0)
@@ -50,6 +66,59 @@ export function UseCasesSection() {
   return (
     <section className="py-28 px-6 bg-gradient-to-b from-background via-secondary/[0.03] to-background relative">
       <div className="max-w-7xl mx-auto">
+        {/* PROOF POINTS SECTION */}
+        <div className="mb-32">
+          <div className="text-center mb-12">
+             <h2 className="text-3xl font-bold mb-4">Why Engineering Teams Switch</h2>
+             <p className="text-muted-foreground">Production evidence from high-scale deployments</p>
+          </div>
+          
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <MetricCard 
+              metric="40%" 
+              label="Cost Reduction" 
+              desc="via right-sized agent resources" 
+              trend="down"
+            />
+            <MetricCard 
+              metric="75%" 
+              label="Risk Reduction" 
+              desc="via isolated fault domains" 
+              trend="down"
+            />
+            <MetricCard 
+              metric="90%" 
+              label="Scaling Efficiency" 
+              desc="via independent scaling" 
+              trend="up"
+            />
+            <MetricCard 
+              metric="100%" 
+              label="Flexibility" 
+              desc="framework & language agnostic" 
+              trend="up"
+            />
+          </div>
+
+          {/* Open Source Signal */}
+          <div className="mt-12 flex items-center justify-center gap-8 text-muted-foreground border-y border-border py-8 bg-card/20 backdrop-blur-sm">
+             <div className="flex items-center gap-2">
+               <Shield className="w-5 h-5 text-primary" />
+               <span className="font-medium text-foreground">Open Source Core</span>
+             </div>
+             <div className="w-px h-8 bg-border" />
+             <div className="flex items-center gap-2">
+               <Fingerprint className="w-5 h-5 text-primary" />
+               <span className="font-medium text-foreground">SOC2 Compliant</span>
+             </div>
+             <div className="w-px h-8 bg-border" />
+             <div className="flex items-center gap-2">
+               <Cpu className="w-5 h-5 text-primary" />
+               <span className="font-medium text-foreground">Kubernetes Native</span>
+             </div>
+          </div>
+        </div>
+
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-medium mb-6">

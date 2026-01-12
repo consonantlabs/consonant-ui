@@ -16,7 +16,7 @@ export function SolutionSection() {
         "Runtime agent selection based on capabilities",
         "Dynamic replanning when assumptions change",
         "Parallel execution of independent sub-goals",
-        "Automatic failure handling and retries",
+        "Outcome: 90% reduction in glue code maintenance",
       ],
       code: `# Submit a goal - Consonant orchestrates automatically
 consonant run --goal "Diagnose database slowness and fix it"
@@ -31,12 +31,12 @@ consonant run --goal "Diagnose database slowness and fix it"
       icon: Shield,
       title: "Declarative Policy Enforcement",
       shortDesc: "Governance that actually works",
-      description: "Define policies once using Open Policy Agent (OPA). Consonant enforces them before every agent invocation. Automatic approvals for high-risk actions. Complete audit trails for compliance.",
+      description: "Define policies once using Open Policy Agent (OPA). Consonant enforces them before every agent invocation. Automatic approvals for high-risk actions. Prevent $1M mistakes with a single rule.",
       features: [
         "Policy-as-code with OPA/Rego",
         "Automatic human-in-the-loop approvals",
         "Rate limiting and cost controls",
-        "Complete audit trails for compliance",
+        "Outcome: Pass SOC2 & reduce risk by 75%",
       ],
       code: `# Rego policy: require approval for production changes
 package consonant.policies
@@ -56,12 +56,12 @@ deny[msg] if {
       icon: LineChart,
       title: "Complete Observability",
       shortDesc: "See everything, debug anything",
-      description: "OpenTelemetry-native tracing captures every agent call, LLM invocation, and policy decision. Replay failed workflows. Pause mid-execution. Export audit trails for compliance.",
+      description: "OpenTelemetry-native tracing captures every agent call, LLM invocation, and policy decision. Replay failed workflows. Pause mid-execution. Right-size resources to stop wasting money.",
       features: [
         "Distributed tracing with OpenTelemetry",
         "Deterministic replay for debugging",
         "Pause and resume workflows",
-        "Export audit logs for compliance",
+        "Outcome: 40% cost reduction via right-sizing",
       ],
       code: `# Every execution is fully traced
 Run ID: run_abc123
@@ -101,6 +101,49 @@ Total: 47.3s | Cost: $0.04`,
             Infrastructure-grade orchestration with the operational controls 
             production AI systems require.
           </p>
+        </div>
+
+        {/* Before/After Code Comparison */}
+        <div className="grid md:grid-cols-2 gap-8 mb-20 relative z-10">
+          {/* Left: Without Consonant */}
+          <div className="rounded-xl border border-destructive/20 bg-destructive/5 overflow-hidden">
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-destructive/20 bg-destructive/10">
+              <div className="w-2.5 h-2.5 rounded-full bg-destructive" />
+              <div className="w-2.5 h-2.5 rounded-full bg-destructive/40" />
+              <div className="w-2.5 h-2.5 rounded-full bg-destructive/40" />
+              <span className="ml-2 text-xs font-mono text-destructive font-semibold">WITHOUT CONSONANT (Monolithic)</span>
+            </div>
+            <div className="p-5 font-mono text-sm leading-relaxed overflow-x-auto">
+              <div className="text-muted-foreground"># Dockerfile: All agents in one container</div>
+              <div className="text-destructive/80 mt-2">COPY . /app</div>
+              <div className="text-destructive/80">CMD ["python", "start_all_agents.py"]</div>
+              
+              <div className="text-muted-foreground mt-4"># Impact:</div>
+              <div className="text-destructive/80">→ Update one agent = Rebuild EVERYTHING</div>
+              <div className="text-destructive/80">→ One crash = 100% blast radius</div>
+              <div className="text-destructive/80">→ Shared resources = Scaling waste</div>
+            </div>
+          </div>
+
+          {/* Right: With Consonant */}
+          <div className="rounded-xl border border-primary/20 bg-primary/5 overflow-hidden shadow-lg shadow-primary/5">
+             <div className="flex items-center gap-2 px-4 py-3 border-b border-primary/20 bg-primary/10">
+              <div className="w-2.5 h-2.5 rounded-full bg-primary" />
+              <div className="w-2.5 h-2.5 rounded-full bg-primary/40" />
+              <div className="w-2.5 h-2.5 rounded-full bg-primary/40" />
+              <span className="ml-2 text-xs font-mono text-primary font-semibold">WITH CONSONANT (Independent)</span>
+            </div>
+            <div className="p-5 font-mono text-sm leading-relaxed overflow-x-auto">
+              <div className="text-muted-foreground"># consonant-manifest.yaml: Independent Runtimes</div>
+              <div className="text-foreground mt-2"><span className="text-primary">researcher:</span></div>
+              <div className="text-foreground pl-4">image: agent-researcher:v2 <span className="text-muted-foreground"># Updates independently</span></div>
+              <div className="text-foreground pl-4">cpu: 2.0 <span className="text-muted-foreground"># Right-sized</span></div>
+              
+              <div className="text-foreground mt-2"><span className="text-primary">editor:</span></div>
+              <div className="text-foreground pl-4">image: agent-editor:v1</div>
+              <div className="text-foreground pl-4">cpu: 0.1 <span className="text-muted-foreground"># Efficient</span></div>
+            </div>
+          </div>
         </div>
 
         {/* Tabs + Content */}

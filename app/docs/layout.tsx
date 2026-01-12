@@ -1,195 +1,138 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { 
-  ChevronRight, 
-  ChevronDown,
-  BookOpen, 
-  Rocket, 
-  Layers, 
-  Code2, 
-  Shield, 
-  Activity,
-  Settings,
-  Plug,
-  FileText,
-  Menu,
-  X,
-  Search,
-  Github,
-  ArrowLeft
-} from "lucide-react"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from "@/components/ui/button"
+import { ChevronRight, Menu, Search, Home as HomeIcon } from "lucide-react"
+import { useState } from "react"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
-interface NavItem {
-  title: string
-  href?: string
-  icon?: React.ReactNode
-  children?: NavItem[]
+const docsConfig = {
+  nav: [
+    {
+      title: "Getting Started",
+      items: [
+        { title: "Introduction", href: "/docs" },
+        { title: "Quickstart", href: "/docs/quickstart" },
+        { title: "Core Concepts", href: "/docs/concepts" },
+        { title: "Architecture", href: "/docs/architecture" },
+      ],
+    },
+    {
+      title: "Guides",
+      items: [
+        { title: "Agent Development", href: "/docs/guides/agent-development" },
+        { title: "Orchestration", href: "/docs/guides/orchestration" },
+        { title: "Policy Enforcement", href: "/docs/guides/policy-enforcement" },
+        { title: "Observability", href: "/docs/guides/observability" },
+        { title: "Human-in-the-Loop", href: "/docs/guides/human-in-the-loop" },
+      ],
+    },
+    {
+      title: "Reference",
+      items: [
+        { title: "CLI Reference", href: "/docs/reference/cli" },
+        { title: "API Reference", href: "/docs/reference/api" },
+        { title: "Configuration", href: "/docs/reference/config" },
+      ],
+    },
+    {
+      title: "Resources",
+      items: [
+        { title: "FAQ", href: "/docs/faq" },
+        { title: "Troubleshooting", href: "/docs/troubleshooting" },
+        { title: "Community", href: "/docs/community" },
+      ],
+    },
+  ],
 }
-
-const navigation: NavItem[] = [
-  {
-    title: "Introduction",
-    icon: <BookOpen className="w-4 h-4" />,
-    children: [
-      { title: "What is Consonant?", href: "/docs" },
-      { title: "Why Consonant?", href: "/docs/why-consonant" },
-      { title: "Core Concepts", href: "/docs/core-concepts" },
-      { title: "Comparison", href: "/docs/comparison" },
-    ],
-  },
-  {
-    title: "Getting Started",
-    icon: <Rocket className="w-4 h-4" />,
-    children: [
-      { title: "Quickstart", href: "/docs/quickstart" },
-      { title: "Installation", href: "/docs/installation" },
-      { title: "Your First Agent", href: "/docs/first-agent" },
-      { title: "Your First Workflow", href: "/docs/first-workflow" },
-    ],
-  },
-  {
-    title: "Architecture",
-    icon: <Layers className="w-4 h-4" />,
-    children: [
-      { title: "Overview", href: "/docs/architecture" },
-      { title: "Control Plane", href: "/docs/architecture/control-plane" },
-      { title: "Agent Runtime", href: "/docs/architecture/agent-runtime" },
-      { title: "State Management", href: "/docs/architecture/state" },
-    ],
-  },
-  {
-    title: "Core Guides",
-    icon: <Code2 className="w-4 h-4" />,
-    children: [
-      { title: "Agent Development", href: "/docs/guides/agent-development" },
-      { title: "Orchestration", href: "/docs/guides/orchestration" },
-      { title: "Policy Enforcement", href: "/docs/guides/policy-enforcement" },
-      { title: "Observability", href: "/docs/guides/observability" },
-      { title: "Human-in-the-Loop", href: "/docs/guides/human-in-the-loop" },
-    ],
-  },
-  {
-    title: "Operations",
-    icon: <Settings className="w-4 h-4" />,
-    children: [
-      { title: "Deployment Patterns", href: "/docs/operations/deployment" },
-      { title: "Scaling", href: "/docs/operations/scaling" },
-      { title: "Security", href: "/docs/operations/security" },
-      { title: "Monitoring", href: "/docs/operations/monitoring" },
-    ],
-  },
-  {
-    title: "API Reference",
-    icon: <FileText className="w-4 h-4" />,
-    children: [
-      { title: "REST API", href: "/docs/api/rest" },
-      { title: "CLI Reference", href: "/docs/api/cli" },
-      { title: "SDK Reference", href: "/docs/api/sdk" },
-    ],
-  },
-  {
-    title: "Integrations",
-    icon: <Plug className="w-4 h-4" />,
-    children: [
-      { title: "LangChain", href: "/docs/integrations/langchain" },
-      { title: "AutoGen", href: "/docs/integrations/autogen" },
-      { title: "CrewAI", href: "/docs/integrations/crewai" },
-      { title: "Custom Agents", href: "/docs/integrations/custom" },
-    ],
-  },
-]
 
 export default function DocsLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-border bg-background/80 backdrop-blur-xl">
-        <div className="h-full px-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            {/* Mobile menu */}
-            <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="lg:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-            
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center">
-                <span className="text-primary font-bold text-sm">C</span>
-              </div>
-              <span className="text-lg font-semibold text-foreground">Consonant</span>
-              <span className="text-xs text-muted-foreground border border-border px-2 py-0.5 rounded">Docs</span>
-            </Link>
-          </div>
-
-          {/* Search */}
-          <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
-            <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="Search documentation..."
-                className="w-full h-10 pl-10 pr-4 rounded-lg border border-border bg-secondary/30 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20"
-              />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground border border-border px-1.5 py-0.5 rounded">⌘K</span>
-            </div>
-          </div>
-
-          {/* Actions */}
-          <div className="flex items-center gap-3">
-            <Link 
-              href="https://github.com/consonant-ai/consonant" 
-              target="_blank"
-              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Github className="w-5 h-5" />
-            </Link>
-            <Button size="sm" variant="outline" asChild className="hidden sm:flex">
-              <Link href="/">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Home
-              </Link>
-            </Button>
-          </div>
+    <div className="flex min-h-screen flex-col">
+      {/* Mobile Nav Header (only visible on small screens) */}
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 lg:hidden">
+        <div className="flex h-14 items-center px-4">
+          <Sheet open={isMobileNavOpen} onOpenChange={setIsMobileNavOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="mr-2">
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="pr-0">
+               <div className="px-4 py-4">
+                 <Link href="/" className="flex items-center gap-2 font-bold text-lg mb-6">
+                    <div className="w-6 h-6 rounded bg-primary text-primary-foreground flex items-center justify-center text-xs">C</div>
+                    Consonant
+                 </Link>
+                 <DocsSidebarNav items={docsConfig.nav} setOpen={setIsMobileNavOpen} />
+               </div>
+            </SheetContent>
+          </Sheet>
+          <div className="flex-1 font-semibold text-sm">Documentation</div>
         </div>
       </header>
 
-      <div className="pt-16 lg:flex">
-        {/* Sidebar */}
-        <aside className={`fixed lg:sticky top-16 left-0 z-40 h-[calc(100vh-4rem)] w-72 border-r border-border bg-background overflow-y-auto transition-transform lg:translate-x-0 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}>
-          <nav className="p-4 space-y-1">
-            {navigation.map((section, index) => (
-              <NavSection key={index} item={section} />
-            ))}
-          </nav>
+      <div className="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
+        
+        {/* Desktop Sidebar */}
+        <aside className="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block">
+          <ScrollArea className="h-full py-6 pr-6 lg:py-8">
+            <div className="mb-4 px-2">
+               <div className="relative">
+                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                 <input 
+                   placeholder="Search documentation..." 
+                   className="w-full rounded-md border border-input bg-secondary/20 px-8 py-2 text-sm text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                 />
+                 <div className="absolute right-2 top-2.5 text-[10px] text-muted-foreground border border-border rounded px-1.5 bg-background">⌘K</div>
+               </div>
+            </div>
+            <DocsSidebarNav items={docsConfig.nav} />
+          </ScrollArea>
         </aside>
 
-        {/* Mobile overlay */}
-        {sidebarOpen && (
-          <div 
-            className="fixed inset-0 z-30 bg-background/80 backdrop-blur-sm lg:hidden"
-            onClick={() => setSidebarOpen(false)}
-          />
-        )}
-
-        {/* Main content */}
-        <main className="flex-1 min-w-0">
-          <div className="max-w-4xl mx-auto px-6 py-12">
+        {/* Main Content */}
+        <main className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_200px]">
+          <div className="mx-auto w-full min-w-0">
+            {/* Breadcrumb placeholder - simplified for now */}
+            <div className="mb-4 flex items-center text-sm text-muted-foreground">
+               <Link href="/" className="hover:text-foreground"><HomeIcon className="w-4 h-4" /></Link>
+               <ChevronRight className="w-4 h-4 mx-1" />
+               <span className="font-medium text-foreground">Docs</span>
+            </div>
+            
             {children}
+            
+            {/* Page Footer Navigation placeholde r*/}
+            <div className="mt-16 flex justify-between border-t border-border pt-8">
+               {/* This helps navigation flow - could be automated later */}
+            </div>
+          </div>
+          
+          {/* Right Sidebar (TOC) */}
+          <div className="hidden text-sm xl:block">
+            <div className="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] pt-10">
+              <ScrollArea className="h-full pb-10">
+                 <div className="space-y-2">
+                   <p className="font-medium text-foreground">On This Page</p>
+                   <ul className="m-0 list-none space-y-2">
+                     {/* Static TOC placeholder - in real app this would parse children */}
+                     <li>
+                       <a href="#" className="text-muted-foreground hover:text-foreground">Overview</a>
+                     </li>
+                   </ul>
+                 </div>
+              </ScrollArea>
+            </div>
           </div>
         </main>
       </div>
@@ -197,54 +140,46 @@ export default function DocsLayout({
   )
 }
 
-function NavSection({ item }: { item: NavItem }) {
-  const pathname = usePathname()
-  const [expanded, setExpanded] = useState(true)
-  
-  const isActive = item.children?.some(child => child.href === pathname)
-
-  return (
-    <div className="mb-4">
-      <button
-        onClick={() => setExpanded(!expanded)}
-        className={`w-full flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-          isActive ? "text-primary" : "text-foreground hover:bg-secondary/50"
-        }`}
-      >
-        {item.icon}
-        <span className="flex-1 text-left">{item.title}</span>
-        {expanded ? (
-          <ChevronDown className="w-4 h-4 text-muted-foreground" />
-        ) : (
-          <ChevronRight className="w-4 h-4 text-muted-foreground" />
-        )}
-      </button>
-      
-      {expanded && item.children && (
-        <div className="mt-1 ml-4 pl-3 border-l border-border space-y-0.5">
-          {item.children.map((child, index) => (
-            <NavLink key={index} item={child} />
-          ))}
-        </div>
-      )}
-    </div>
-  )
+interface DocsSidebarNavProps {
+  items: {
+    title: string
+    items: {
+      title: string
+      href: string
+      items?: any[]
+    }[]
+  }[]
+  setOpen?: (open: boolean) => void
 }
 
-function NavLink({ item }: { item: NavItem }) {
+function DocsSidebarNav({ items, setOpen }: DocsSidebarNavProps) {
   const pathname = usePathname()
-  const isActive = pathname === item.href
-  
+
   return (
-    <Link
-      href={item.href || "#"}
-      className={`block px-3 py-1.5 text-sm rounded-lg transition-colors ${
-        isActive 
-          ? "text-primary bg-primary/5 font-medium" 
-          : "text-muted-foreground hover:text-foreground hover:bg-secondary/30"
-      }`}
-    >
-      {item.title}
-    </Link>
+    <div className="w-full">
+      {items.map((item, index) => (
+        <div key={index} className="pb-4">
+          <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-semibold text-foreground">
+            {item.title}
+          </h4>
+          {item.items?.length && (
+            <div className="grid grid-flow-row auto-rows-max text-sm">
+              {item.items.map((navItem, index) => (
+                <Link
+                  key={index}
+                  href={navItem.href}
+                  className={`group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:underline text-muted-foreground hover:text-foreground ${
+                     pathname === navItem.href ? "font-medium text-primary" : ""
+                  }`}
+                  onClick={() => setOpen?.(false)}
+                >
+                  {navItem.title}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
   )
 }
