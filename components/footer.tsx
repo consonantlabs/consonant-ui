@@ -17,7 +17,7 @@ export function Footer() {
               <span className="text-lg font-semibold text-foreground">Consonant</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
-              Orchestration infrastructure for production AI agent systems.
+              Production infrastructure for multi Ai agents systems.
             </p>
             <div className="flex items-center gap-3">
               <SocialLink href="https://github.com/consonant-ai/consonant" icon={<Github className="w-4 h-4" />} />

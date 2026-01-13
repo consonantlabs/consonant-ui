@@ -38,9 +38,9 @@ export function DisasterSection() {
                     <div className="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-red-900 border-2 border-red-500 z-10" />
                     <div className="flex items-baseline gap-4 mb-2">
                         <span className="text-red-400 font-mono font-bold">02:15 AM</span>
-                        <h3 className="font-bold text-lg">Consumes all 16GB RAM</h3>
+                        <h3 className="font-bold text-lg">Consumes all RAM</h3>
                     </div>
-                    <p className="text-muted-foreground text-sm">The node is now under extreme pressure. Other pods are being starved.</p>
+                    <p className="text-muted-foreground text-sm">The node is now under extreme pressure. Others are being starved.</p>
                 </div>
 
                 {/* 2:16 AM Impact */}
@@ -96,7 +96,7 @@ export function DisasterSection() {
                         <span className="text-muted-foreground">Revenue Lost</span>
                         <div className="text-right">
                              <span className="font-mono font-bold text-xl text-red-500">$18,750</span>
-                             <div className="text-xs text-muted-foreground">at $25K/hour</div>
+                        
                         </div>
                     </div>
 

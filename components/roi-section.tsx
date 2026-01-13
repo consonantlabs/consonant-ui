@@ -43,7 +43,7 @@ export function ROISection() {
                 <div className="text-4xl font-bold mb-2 text-foreground">3x Faster</div>
                 <div className="text-xl font-medium mb-6">Feature Shipping</div>
                 <p className="text-muted-foreground leading-relaxed">
-                    Deploy agents independently. Updates take 2 minutes, not 20 minutes wait time.
+                    Deploy agents independently. Updates take 2 minutes, not hours.
                     <span className="block mt-4 text-blue-400 text-sm font-medium">Higher throughput &rarr;</span>
                 </p>
             </div>

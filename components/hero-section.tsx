@@ -21,8 +21,8 @@ export function HeroSection() {
         
         {/* Main Headline */}
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground text-center mb-6 max-w-4xl animate-fade-in-up delay-100">
-          <span className="block">Your AI agents crash together.</span>
-          <span className="block text-primary mt-2">We separate them.</span>
+          <span className="block">Think Kubernetes but for your </span>
+          <span className="block text-primary mt-2"> multi Agents systems.</span>
         </h1>
         
         {/* Subheadline */}

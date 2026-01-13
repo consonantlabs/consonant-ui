@@ -99,12 +99,7 @@ export function WalkthroughSection() {
             </div>
         </div>
 
-        <div className="flex justify-center">
-            <button className="group inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-full font-medium hover:bg-foreground/90 transition-colors">
-                View Complete Trace
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-        </div>
+       
 
       </div>
     </section>

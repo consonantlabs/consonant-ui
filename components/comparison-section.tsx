@@ -31,9 +31,9 @@ export function ComparisonSection() {
                     </tr>
                     <tr>
                         <td className="py-4 px-6 font-medium">Deploy Time</td>
-                        <td className="py-4 px-6 text-red-400">20 min</td>
-                        <td className="py-4 px-6">15 min</td>
-                        <td className="py-4 px-6 bg-primary/5 font-bold text-green-500">2 min</td>
+                        <td className="py-4 px-6 text-red-400">Hours</td>
+                        <td className="py-4 px-6">30 min</td>
+                        <td className="py-4 px-6 bg-primary/5 font-bold text-green-500">1 min</td>
                     </tr>
                     <tr>
                          <td className="py-4 px-6 font-medium">Governance</td>
@@ -49,9 +49,9 @@ export function ComparisonSection() {
                     </tr>
                      <tr>
                          <td className="py-4 px-6 font-medium">Time to Prod</td>
-                        <td className="py-4 px-6">6 months</td>
-                        <td className="py-4 px-6">4 months</td>
-                        <td className="py-4 px-6 bg-primary/5 font-bold text-green-500">1 week</td>
+                        <td className="py-4 px-6">Months</td>
+                        <td className="py-4 px-6">Months</td>
+                        <td className="py-4 px-6 bg-primary/5 font-bold text-green-500">A day</td>
                     </tr>
                 </tbody>
             </table>

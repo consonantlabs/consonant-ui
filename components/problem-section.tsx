@@ -161,6 +161,14 @@ export function ProblemSection() {
             </div>
           ))}
         </div>
+
+         <div className="mt-16 text-center animate-fade-in-up delay-300">
+          <p className="text-xl md:text-2xl font-medium text-foreground">
+            If you have 3+ agents in production, you've hit at least five of these.
+            <br />
+            <span className="text-primary font-bold mt-2 inline-block">Consonant solves all.</span>
+          </p>
+        </div>
       </div>
     </section>
   )
