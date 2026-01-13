@@ -1,55 +1,70 @@
-import { Users, Code2, Building2 } from "lucide-react"
+"use client"
+
+import { Server, ShieldAlert, Rocket } from "lucide-react"
 
 export function PersonasSection() {
   const personas = [
     {
-      icon: Users,
-      title: "Operators",
-      description: "Monitor, approve, and intervene in real-time.",
-      features: ["Approval workflows", "Pause/resume controls", "Deterministic replay"],
+      icon: Server,
+      title: "Platform Engineering",
+      needs: [
+        "Running 5+ AI agents in production",
+        "Tired of fragile monolithic deployments",
+        "Need governance and observability"
+      ],
+      quote: "Stop firefighting, start scaling."
     },
     {
-      icon: Code2,
-      title: "Engineers",
-      description: "Define manifests, policies, and fallbacks.",
-      features: ["YAML-based configuration", "Policy-as-code", "Retry & fallback chains"],
+      icon: ShieldAlert,
+      title: "Regulated Industries",
+      needs: [
+        "Need SOC2/HIPAA compliance",
+        "Require complete audit trails",
+        "Can't afford governance gaps"
+      ],
+      quote: "Pass audits, not excuses."
     },
     {
-      icon: Building2,
-      title: "Teams",
-      description: "Compose workflows and maintain governance.",
-      features: ["Cross-team composability", "Audit trail export", "Compliance controls"],
-    },
+      icon: Rocket,
+      title: "AI-First Companies",
+      needs: [
+        "Scaling from 10 to 100+ agents",
+        "Need independent agent lifecycle",
+        "Want runtime intelligence"
+      ],
+      quote: "Build the AI revolution on solid infrastructure."
+    }
   ]
 
   return (
-    <section className="py-24 px-6 bg-secondary/10">
+    <section className="py-24 px-6 bg-muted/20">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Built for Every Role</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Whether you operate, build, or govern — Consonant has you covered.
-          </p>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+            Who This Is For
+          </h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {personas.map((persona, index) => (
-            <div key={index} className="p-8 rounded-2xl border border-border bg-card">
-              <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center mb-6">
-                <persona.icon className="w-7 h-7 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground mb-2">{persona.title}</h3>
-              <p className="text-muted-foreground mb-6">{persona.description}</p>
-              <ul className="space-y-3">
-                {persona.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-foreground">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            {personas.map((p, i) => (
+                <div key={i} className="bg-card border border-border p-8 rounded-2xl flex flex-col hover:border-primary/50 transition-colors">
+                    <div className="bg-primary/10 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
+                        <p.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-4">{p.title}</h3>
+                    <ul className="space-y-3 mb-8 flex-1">
+                        {p.needs.map((need, j) => (
+                            <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
+                                <span className="bg-primary/20 w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" />
+                                {need}
+                            </li>
+                        ))}
+                    </ul>
+                    <div className="pt-6 border-t border-border/50">
+                        <p className="font-medium italic text-foreground">"{p.quote}"</p>
+                    </div>
+                </div>
+            ))}
         </div>
       </div>
     </section>

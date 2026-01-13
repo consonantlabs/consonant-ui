@@ -2,40 +2,69 @@
 
 export function MetricsStrip() {
   const metrics = [
-    { 
-      value: "40%", 
+    {
+      value: "40%",
       label: "Cost Reduction",
-      subtext: "Right-sized resources vs over-provisioning" 
+      context: {
+        before: "$2,920/mo (monolithic)",
+        after: "$1,250/mo (right-sized)",
+        saved: "$20k/yr saved"
+      }
     },
-    { 
-      value: "75%", 
-      label: "Risk Reduction",
-      subtext: "Update one agent without touching others" 
+    {
+      value: "75%",
+      label: "Less Risk",
+      context: {
+        before: "208 hrs/yr fragile",
+        after: "35 hrs/yr risk",
+        saved: "Ship 3x faster"
+      }
     },
-    { 
-      value: "90%", 
+    {
+      value: "90%",
       label: "Scaling Efficiency",
-      subtext: "Scale only what needs to scale" 
+      context: {
+        before: "Scale ALL agents",
+        after: "Scale per agent",
+        saved: "$150k/yr peak savings"
+      }
     },
-    { 
-      value: "99.9%", 
+    {
+      value: "99.9%",
       label: "System Uptime",
-      subtext: "Failures isolated—one agent down doesn't kill the system" 
-    },
+      context: {
+        before: "18 days downtime",
+        after: "7 days downtime",
+        saved: "$2.75M revenue protected"
+      }
+    }
   ]
 
   return (
-    <section className="py-20 border-y border-border/50 bg-secondary/5">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <section className="py-20 border-y border-border bg-background/50 backdrop-blur-sm">
+      <div className="container px-6 mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {metrics.map((metric, index) => (
-            <div key={index} className="text-center group p-4 rounded-xl hover:bg-card/50 transition-colors">
-              <div className="text-4xl md:text-5xl font-bold text-foreground mb-2 tracking-tight group-hover:text-primary transition-colors">
+            <div key={index} className="text-center group">
+              <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-foreground to-foreground/50 mb-2">
                 {metric.value}
               </div>
-              <div className="text-lg font-medium text-foreground mb-2">{metric.label}</div>
-              <div className="text-sm text-muted-foreground leading-snug max-w-[200px] mx-auto">
-                {metric.subtext}
+              <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">
+                {metric.label}
+              </div>
+              
+              <div className="text-xs text-left bg-muted/30 rounded-lg p-3 space-y-1.5 opacity-80 group-hover:opacity-100 transition-opacity border border-border/50">
+                <div className="flex justify-between">
+                    <span className="text-red-400">Before:</span>
+                    <span className="text-muted-foreground">{metric.context.before}</span>
+                </div>
+                 <div className="flex justify-between">
+                    <span className="text-primary">After:</span>
+                    <span className="text-foreground">{metric.context.after}</span>
+                </div>
+                <div className="pt-1.5 mt-1.5 border-t border-border/50 font-bold text-center text-primary">
+                    {metric.context.saved}
+                </div>
               </div>
             </div>
           ))}
@@ -44,4 +73,3 @@ export function MetricsStrip() {
     </section>
   )
 }
-

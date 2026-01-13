@@ -1,8 +1,13 @@
 import { Navbar } from "@/components/navbar"
 import { HeroSection } from "@/components/hero-section"
+import { DisasterSection } from "@/components/disaster-section"
 import { ProblemSection } from "@/components/problem-section"
-import { SolutionSection } from "@/components/solution-section"
+import { ArchitectureSection } from "@/components/architecture-section"
+import { WalkthroughSection } from "@/components/walkthrough-section"
+import { ROISection } from "@/components/roi-section"
 import { MetricsStrip } from "@/components/metrics-strip"
+import { PersonasSection } from "@/components/personas-section"
+import { ComparisonSection } from "@/components/comparison-section"
 import { FinalCTA } from "@/components/final-cta"
 import { Footer } from "@/components/footer"
 
@@ -12,9 +17,14 @@ export default function Home() {
       <GridBackground />
       <Navbar />
       <HeroSection />
+      <DisasterSection />
       <ProblemSection />
-      <SolutionSection />
+      <ArchitectureSection />
+      <WalkthroughSection />
+      <ROISection />
       <MetricsStrip />
+      <PersonasSection />
+      <ComparisonSection />
       <FinalCTA />
       <Footer />
     </main>
@@ -23,7 +33,7 @@ export default function Home() {
 
 function GridBackground() {
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
       {/* Animated grid */}
       <div className="absolute inset-0 bg-[linear-gradient(oklch(0.75_0.15_195_/_0.03)_1px,transparent_1px),linear-gradient(90deg,oklch(0.75_0.15_195_/_0.03)_1px,transparent_1px)] bg-[size:60px_60px] animate-grid-flow" />
       
@@ -33,4 +43,3 @@ function GridBackground() {
     </div>
   )
 }
-
