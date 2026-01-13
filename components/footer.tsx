@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Github, Twitter, Linkedin, Mail } from "lucide-react"
 
 export function Footer() {
@@ -11,10 +12,13 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center">
-                <span className="text-primary font-bold text-sm">C</span>
-              </div>
-              <span className="text-lg font-semibold text-foreground">Consonant</span>
+              <Image 
+                src="/consonant-logo.png" 
+                alt="Consonant Logo" 
+                width={100} 
+                height={25} 
+                className="h-7 w-auto brightness-0 invert opacity-80" 
+              />
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
               Production infrastructure for multi Ai agents systems.
