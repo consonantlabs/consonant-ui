@@ -1,6 +1,6 @@
 "use client"
 
-import { AlertTriangle, Code2, Database, Gauge, Lock, Zap } from "lucide-react"
+import { AlertTriangle, Code2, Database, Gauge, Lock, Zap, Package, Cpu } from "lucide-react"
 
 export function ProblemSection() {
   const problems = [
@@ -39,6 +39,24 @@ export function ProblemSection() {
       headline: "You scale everything or nothing.",
       description: "Your researcher gets 500 requests/hour. Your editor gets 50. But scaling means 5x both. You're running 4 editor replicas that sit idle while you pay for them.",
       impact: "90% of your scaled replicas are burning resources for no reason."
+    },
+    {
+      icon: Package,
+      title: "Dependency Hell Disaster",
+      metric: "CONFLICT",
+      metricLabel: "HELL",
+      headline: "Python versions at war.",
+      description: "Agent A needs `numpy==1.22`. Agent B needs `numpy==1.26`. You can't run them in the same container. You're forced to downgrade one or create complex virtual environments that break in production.",
+      impact: "You can't use the best tools for each job because of library conflicts."
+    },
+    {
+      icon: Cpu,
+      title: "Noisy Neighbor Disaster",
+      metric: "STARVED",
+      metricLabel: "LATENCY",
+      headline: "One agent hogs the CPU.",
+      description: "Your heavy 'Reasoning Agent' spikes to 100% CPU. The OS scheduler starves your low-latency 'Router Agent'. API requests time out because the router can't get CPU cycles.",
+      impact: "Unrelated agents fail because one neighbor is greedy."
     },
     {
       icon: Lock,

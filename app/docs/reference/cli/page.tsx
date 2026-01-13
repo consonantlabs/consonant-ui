@@ -1,40 +1,39 @@
-import { DocHeader, CodeBlock } from "../../doc-components"
+"use client"
+
+import { DocHeader, Callout, CodeBlock } from "../../doc-components"
 
 export default function CliReferencePage() {
   return (
-    <div>
+    <div className="max-w-4xl">
       <DocHeader 
         title="CLI Reference"
-        description="Command line interface for managing Consonant workflows, agents, and policies."
-        label="REFERENCE"
+        description="Complete command list for the Consonant CLI."
+        label="Reference"
       />
 
-      <div className="prose prose-invert max-w-none text-muted-foreground">
-        <h2 className="text-foreground text-2xl font-bold mt-12 mb-6">Installation</h2>
-        <CodeBlock code={`curl -fsSL https://get.consonant.dev | sh`} />
+      <div className="prose prose-invert max-w-none">
+        <h2>Global Flags</h2>
+        <ul>
+            <li><code>--debug</code>: Enable verbose logging</li>
+            <li><code>--namespace</code>: Kubernetes namespace (default: consonant)</li>
+        </ul>
 
-        <h2 className="text-foreground text-2xl font-bold mt-12 mb-6">Core Commands</h2>
+        <h2>Commands</h2>
+
+        <h3>cons init</h3>
+        <p>Initialize the control plane.</p>
+
+        <h3>cons deploy</h3>
+        <p>Deploy the current project to the cluster.</p>
+
+        <h3>cons run</h3>
+        <p>Execute a workflow.</p>
+
+        <h3>cons logs</h3>
+        <p>Stream logs from distributed agents.</p>
         
-        <h3 className="text-foreground text-xl font-semibold mt-8 mb-4">consonant run</h3>
-        <p>Submit a goal for execution.</p>
-        <CodeBlock code={`consonant run --goal "Create a marketing plan for Q4"`} />
-
-        <h3 className="text-foreground text-xl font-semibold mt-8 mb-4">consonant agents list</h3>
-        <p>List all registered agents and their status.</p>
-        <CodeBlock code={`consonant agents list -n default`} />
-
-        <h3 className="text-foreground text-xl font-semibold mt-8 mb-4">consonant workflow status</h3>
-        <p>Get the status and plan of a specific workflow.</p>
-        <CodeBlock code={`consonant workflow status <workflow-id>`} />
-
-        <h3 className="text-foreground text-xl font-semibold mt-8 mb-4">consonant approvals list</h3>
-        <p>See pending human-in-the-loop requests.</p>
-        <CodeBlock code={`consonant approvals list`} />
-
-        <h3 className="text-foreground text-xl font-semibold mt-8 mb-4">consonant approvals approve</h3>
-        <p>Approve a pending request.</p>
-        <CodeBlock code={`consonant approvals approve <request-id> --comment "Looks good"`} />
-
+        <h3>cons dashboard</h3>
+        <p>Open the web dashboard.</p>
       </div>
     </div>
   )

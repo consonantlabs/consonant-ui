@@ -1,53 +1,36 @@
-import { DocHeader, CodeBlock } from "../../doc-components"
+"use client"
+
+import { DocHeader, Callout, CodeBlock } from "../../doc-components"
 
 export default function ApiReferencePage() {
   return (
-    <div>
+    <div className="max-w-4xl">
       <DocHeader 
         title="API Reference"
-        description="Interact with the Consonant Control Plane programmatically."
-        label="REFERENCE"
+        description="Interact with the Control Plane programmatically."
+        label="Reference"
       />
 
-      <div className="prose prose-invert max-w-none text-muted-foreground">
+      <div className="prose prose-invert max-w-none">
+        <h2>Authentication</h2>
         <p>
-          The Consonant API is RESTful and served on port <code>8080</code> by default in the 
-          control plane pod.
+            All API requests require a Bearer token.
         </p>
 
-        <h2 className="text-foreground text-2xl font-bold mt-12 mb-6">Authentication</h2>
-        <p>
-          Authenticate using a Bearer token.
-        </p>
-        <CodeBlock code={`curl -H "Authorization: Bearer <token>" https://api.consonant.dev/v1/agents`} />
-
-        <h2 className="text-foreground text-2xl font-bold mt-12 mb-6">OpenAPI Spec</h2>
-        <p>
-          The full OpenAPI specification is available at <code>/openapi.json</code> on the control plane.
-        </p>
+        <h2>Endpoints</h2>
         
-        <div className="my-8 p-4 border border-border rounded-lg bg-card">
-           <p className="text-center italic text-muted-foreground">
-             Interactive Swagger UI documentation would appear here in a full implementation.
-           </p>
-        </div>
+        <h3>POST /v1/goals</h3>
+        <p>Submit a new high-level goal.</p>
+        <CodeBlock language="json" code={`{
+  "goal": "Process Q3 reports",
+  "context": { "priority": "high" }
+}`} />
 
-        <h2 className="text-foreground text-2xl font-bold mt-12 mb-6">Endpoints</h2>
+        <h3>GET /v1/runs/{`{run_id}`}</h3>
+        <p>Get the status of a workflow run.</p>
         
-        <h3 className="text-foreground text-xl font-semibold mt-8 mb-4">POST /v1/workflows</h3>
-        <p>Create a new workflow based on a goal.</p>
-        <CodeBlock code={`POST /v1/workflows
-{
-  "goal": "string",
-  "context": {}
-}`} language="json" />
-
-        <h3 className="text-foreground text-xl font-semibold mt-8 mb-4">GET /v1/workflows/{`{id}`}</h3>
-        <p>Get workflow status and plan.</p>
-
-        <h3 className="text-foreground text-xl font-semibold mt-8 mb-4">GET /v1/agents</h3>
-        <p>List registered agents.</p>
-
+        <h3>GET /v1/agents</h3>
+        <p>List all registered agents and their health status.</p>
       </div>
     </div>
   )
