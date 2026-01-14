@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Terminal, Cloud, LineChart } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export function FinalCTA() {
   return (
@@ -107,6 +108,21 @@ export function FinalCTA() {
                 <ArrowRight className="w-4 h-4 ml-2" />
               </a>
             </Button>
+          </div>
+        </div>
+
+        {/* Branding Badge */}
+        <div className="flex justify-center mb-12">
+          <div className="flex items-center gap-3 px-4 py-2 rounded-full border border-border bg-card/50 opacity-80 backdrop-blur-sm">
+             <span className="text-[10px] uppercase tracking-tighter text-muted-foreground">Built on</span>
+             <Image 
+                src="/kagent-logo.png" 
+                alt="KAgent Logo" 
+                width={80} 
+                height={24} 
+               
+              />
+              <span className="text-[10px] whitespace-nowrap text-muted-foreground/80 font-mono">solo.io kagent</span>
           </div>
         </div>
 

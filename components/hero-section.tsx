@@ -14,9 +14,14 @@ export function HeroSection() {
       
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm mb-8">
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          Now in Beta
+        <div className="flex items-center gap-4 mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            Now in Beta
+          </div>
+          <div className="text-[10px] uppercase tracking-widest text-muted-foreground/60 border-l border-border pl-4">
+            Built on solo.io kagent (CNCF)
+          </div>
         </div>
         
         {/* Main Headline */}

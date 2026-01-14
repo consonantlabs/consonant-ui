@@ -54,7 +54,7 @@
   --muted-foreground: oklch(0.65 0 0);
   --accent: oklch(0.55 0.25 290); /* Vibrant purple #7C3AED */
   --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.55 0.22 25);
+  --destructive: oklch(0.5 0.14 28);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.22 0.01 240);
   --input: oklch(0.22 0.01 240);
@@ -139,6 +139,11 @@
   .glow-accent {
     box-shadow: 0 0 20px var(--glow-accent, oklch(0.55 0.25 290 / 0.3)),
                 0 0 40px var(--glow-accent, oklch(0.55 0.25 290 / 0.15));
+  }
+
+  .glow-destructive {
+    box-shadow: 0 0 20px oklch(0.5 0.14 28 / 0.4),
+                0 0 40px oklch(0.5 0.14 28 / 0.2);
   }
   
   .glow-border {

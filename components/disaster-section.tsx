@@ -4,31 +4,32 @@ import { Clock, AlertOctagon, TrendingDown, Frown, DollarSign } from "lucide-rea
 
 export function DisasterSection() {
   return (
-    <section className="py-24 px-6 bg-red-950/20 border-y border-red-900/20 relative overflow-hidden">
+    <section className="py-24 px-6 bg-destructive/5 border-y border-destructive/10 relative overflow-hidden">
         {/* Background Alert Accents */}
         <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-20 -left-20 w-96 h-96 bg-red-600/5 rounded-full blur-[100px]" />
-            <div className="absolute bottom-20 -right-20 w-96 h-96 bg-orange-600/5 rounded-full blur-[100px]" />
+            <div className="absolute top-20 -left-20 w-96 h-96 bg-destructive/5 rounded-full blur-[100px]" />
+            <div className="absolute bottom-20 -right-20 w-96 h-96 bg-orange-500/5 rounded-full blur-[100px]" />
         </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 font-mono">
-                WHAT BREAKS WHEN YOU SHIP MULTI-AGENT SYSTEMS
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 font-mono tracking-tight">
+                WHAT BREAKS WHEN YOU SHIP <br className="hidden md:block" />
+                MULTI-AGENT SYSTEMS
             </h2>
-            <p className="text-xl text-red-400 font-medium">
+            <p className="text-xl text-destructive font-medium opacity-90">
                 Infrastructure failure is the #1 killer of agent reliability.
             </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* LEFT: Engineering Failure Flow */}
-            <div className="relative border-l-2 border-red-900/50 pl-8 space-y-12 py-4">
+            <div className="relative border-l border-destructive/20 pl-8 space-y-12 py-4">
                 {/* Latency Spike */}
                 <div className="relative">
-                    <div className="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-red-900 border-2 border-red-500 z-10" />
+                    <div className="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-background border border-destructive z-10 shadow-[0_0_10px_rgba(var(--destructive),0.5)]" />
                     <div className="flex items-baseline gap-4 mb-2">
-                        <span className="text-red-400 font-mono font-bold">0ms</span>
+                        <span className="text-destructive font-mono text-sm font-bold">0ms</span>
                         <h3 className="font-bold text-lg">Minor Latency Spike</h3>
                     </div>
                     <p className="text-muted-foreground text-sm">A vector database or external tool slows down by 200ms.</p>
@@ -36,9 +37,9 @@ export function DisasterSection() {
 
                 {/* Retry Loop */}
                 <div className="relative">
-                    <div className="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-red-900 border-2 border-red-500 z-10" />
+                    <div className="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-background border border-destructive z-10 shadow-[0_0_10px_rgba(var(--destructive),0.5)]" />
                     <div className="flex items-baseline gap-4 mb-2">
-                        <span className="text-red-400 font-mono font-bold">5s</span>
+                        <span className="text-destructive font-mono text-sm font-bold">5s</span>
                         <h3 className="font-bold text-lg">Unbounded Retry Loop</h3>
                     </div>
                     <p className="text-muted-foreground text-sm">Agent A enters a loop, recursively calling tools while consuming 90% CPU.</p>
@@ -46,28 +47,28 @@ export function DisasterSection() {
 
                 {/* Blast Radius */}
                 <div className="relative">
-                    <div className="absolute -left-[45px] top-0 w-7 h-7 rounded-full bg-red-600 animate-pulse z-10 flex items-center justify-center">
-                        <AlertOctagon className="w-4 h-4 text-white" />
+                    <div className="absolute -left-[45px] top-[-4px] w-8 h-8 rounded-full bg-destructive flex items-center justify-center z-10 glow-destructive animate-pulse">
+                        <AlertOctagon className="w-5 h-5 text-destructive-foreground" />
                     </div>
                     <div className="flex items-baseline gap-4 mb-2">
-                        <span className="text-red-500 font-mono font-bold">12s</span>
-                        <h3 className="font-bold text-xl text-red-500">Shared process OOMs</h3>
+                        <span className="text-destructive font-mono font-bold">12s</span>
+                        <h3 className="font-bold text-xl text-destructive">Shared process OOMs</h3>
                     </div>
-                    <div className="space-y-3 mt-4 bg-red-950/30 p-4 rounded-lg border border-red-900/50">
-                        <div className="flex items-center gap-3 text-red-300">
-                             <TrendingDown className="w-4 h-4" />
-                             <span>Agent A OOMs → <span className="font-bold text-red-500">ALL AGENTS DIE</span></span>
+                    <div className="space-y-3 mt-4 bg-destructive/5 p-5 rounded-xl border border-destructive/10 backdrop-blur-sm">
+                        <div className="flex items-center gap-3 text-muted-foreground">
+                             <TrendingDown className="w-4 h-4 text-destructive/70" />
+                             <span>Agent A OOMs → <span className="font-bold text-destructive">ALL AGENTS DIE</span></span>
                         </div>
-                        <div className="flex items-center gap-3 text-red-300">
-                             <TrendingDown className="w-4 h-4" />
-                             <span>Retry loops <span className="font-bold text-red-500">AMPLIFY FAILURES</span></span>
+                        <div className="flex items-center gap-3 text-muted-foreground">
+                             <TrendingDown className="w-4 h-4 text-destructive/70" />
+                             <span>Retry loops <span className="font-bold text-destructive">AMPLIFY FAILURES</span></span>
                         </div>
-                        <div className="flex items-center gap-3 text-red-300">
-                             <TrendingDown className="w-4 h-4" />
-                             <span>Tool dependency <span className="font-bold text-red-500">STALLS ENTIRE SYSTEM</span></span>
+                        <div className="flex items-center gap-3 text-muted-foreground">
+                             <TrendingDown className="w-4 h-4 text-destructive/70" />
+                             <span>Tool dependency <span className="font-bold text-destructive">STALLS ENTIRE SYSTEM</span></span>
                         </div>
-                        <div className="h-px bg-red-800/50 my-2" />
-                        <div className="font-bold text-red-500 text-lg uppercase tracking-wider">
+                        <div className="h-px bg-destructive/10 my-3" />
+                        <div className="font-bold text-destructive text-sm uppercase tracking-[0.2em]">
                             💥 PRODUCTION DEPLOYMENT FROZEN
                         </div>
                     </div>
@@ -75,39 +76,42 @@ export function DisasterSection() {
             </div>
 
             {/* RIGHT: The Metrics */}
-            <div className="bg-card/50 backdrop-blur-sm border border-border p-8 rounded-2xl shadow-xl">
-                <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
-                    <AlertOctagon className="w-6 h-6 text-red-500" />
-                    The Engineering Impact
+            <div className="bg-card/30 backdrop-blur-md border border-border/50 p-8 rounded-2xl shadow-2xl relative">
+                <div className="absolute top-0 right-0 p-4 opacity-10">
+                    <AlertOctagon className="w-24 h-24 text-destructive" />
+                </div>
+                
+                <h3 className="text-xl font-bold mb-8 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-destructive" />
+                    Engineering Impact Analysis
                 </h3>
                 
-                <div className="space-y-6">
-                    <div className="flex items-center justify-between p-4 bg-background/50 rounded-lg">
-                        <span className="text-muted-foreground">Blast Radius</span>
-                        <span className="font-mono font-bold text-xl text-red-500">100% Shared Fate</span>
+                <div className="space-y-4">
+                    <div className="flex items-center justify-between p-4 bg-secondary/20 rounded-lg hover:bg-secondary/30 transition-colors">
+                        <span className="text-sm text-muted-foreground">Blast Radius</span>
+                        <span className="font-mono font-bold text-destructive">100% Shared Fate</span>
                     </div>
 
-                    <div className="flex items-center justify-between p-4 bg-background/50 rounded-lg">
-                        <span className="text-muted-foreground">Resource Coupling</span>
-                        <span className="font-mono font-bold text-xl text-red-400">Waste Math</span>
-                        <span className="text-xs text-muted-foreground">(scale all or none)</span>
+                    <div className="flex items-center justify-between p-4 bg-secondary/20 rounded-lg hover:bg-secondary/30 transition-colors">
+                        <span className="text-sm text-muted-foreground">Resource Coupling</span>
+                        <span className="font-mono font-bold text-destructive/80">Waste Math</span>
                     </div>
 
-                    <div className="flex items-center justify-between p-4 bg-background/50 rounded-lg border border-red-500/20">
-                        <span className="text-muted-foreground">Cost Explosion</span>
+                    <div className="flex items-center justify-between p-4 bg-destructive/5 rounded-lg border border-destructive/20">
+                        <span className="text-sm text-muted-foreground">Cost Explosion</span>
                         <div className="text-right">
-                             <span className="font-mono font-bold text-xl text-red-500">Recursive Tool Call Burn</span>
+                             <span className="font-mono font-bold text-destructive">Recursive Tool Burn</span>
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-between p-4 bg-background/50 rounded-lg">
-                        <span className="text-muted-foreground">Iteration Speed</span>
-                        <span className="font-bold text-red-400">Locked to Monolith</span>
+                    <div className="flex items-center justify-between p-4 bg-secondary/20 rounded-lg">
+                        <span className="text-sm text-muted-foreground">Iteration Speed</span>
+                        <span className="text-destructive/80 font-bold">Locked to Monolith</span>
                     </div>
 
-                    <div className="flex items-center justify-between p-4 bg-background/50 rounded-lg">
-                         <span className="text-muted-foreground">Hallucination Detection</span>
-                         <span className="font-bold text-red-400">Impossible (No isolation)</span>
+                    <div className="flex items-center justify-between p-4 bg-secondary/20 rounded-lg">
+                         <span className="text-sm text-muted-foreground">Observability</span>
+                         <span className="text-destructive/80 font-bold">Impossible (No isolation)</span>
                     </div>
                 </div>
 

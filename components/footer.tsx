@@ -71,15 +71,15 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
             <div className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
-              <span className="text-[10px] uppercase tracking-tighter">Powered by</span>
+              <span className="text-[10px] uppercase tracking-tighter">Built on</span>
               <Image 
                 src="/kagent-logo.png" 
                 alt="KAgent Logo" 
                 width={60} 
                 height={18} 
-                className="brightness-0 invert h-4 w-auto" 
+               
               />
-              <span className="text-[10px] whitespace-nowrap">solo.io kagent (CNCF)</span>
+              <span className="text-[10px] whitespace-nowrap text-muted-foreground/80">solo.io kagent (CNCF)</span>
             </div>
             <span>Built with ❤️ for AI engineers</span>
           </div>
