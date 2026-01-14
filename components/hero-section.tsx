@@ -19,7 +19,7 @@ export function HeroSection() {
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             Now in Beta
           </div>
-          <div className="text-[10px] uppercase tracking-widest text-muted-foreground border-l border-border pl-4">
+          <div className="text-[15px] uppercase tracking-widest text-muted-foreground border-l border-border pl-4">
             Built on kagent (CNCF)
           </div>
         </div>

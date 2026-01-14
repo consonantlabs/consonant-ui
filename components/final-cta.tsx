@@ -114,15 +114,15 @@ export function FinalCTA() {
         {/* Branding Badge */}
         <div className="flex justify-center mb-12">
           <div className="flex items-center gap-3 px-4 py-2 rounded-full border border-border bg-card/50 opacity-80 backdrop-blur-sm">
-             <span className="text-[10px] uppercase tracking-tighter text-muted-foreground">Built on</span>
+             <span className="text-[14px] uppercase tracking-tighter text-muted-foreground">Built on</span>
              <Image 
-                src="/kagent-logo.png" 
+                src="/kagent-logo.jpg" 
                 alt="KAgent Logo" 
-                width={90} 
-                height={30} 
+                width={100} 
+                height={40} 
                
               />
-              <span className="text-[10px] whitespace-nowrap text-muted-foreground/80 font-mono">solo.io kagent</span>
+              <span className="text-[14px] whitespace-nowrap text-muted-foreground/80 font-mono">solo.io kagent</span>
           </div>
         </div>
 
